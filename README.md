@@ -37,3 +37,5 @@ HTML, CSS, JavaScript, Node, NPM, Inquirer.
 [Repo](https://github.com/faithhopeandvanity/team-profile-generator)
 
 [Screenshot of finished roster](/screenshot/myteam.jpg)
+
+[HTML file of example - right-click link name in _VS Code_ for 'Open in Live Server' option](/exampleHTML/exampleroster.html)
