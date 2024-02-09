@@ -19,7 +19,12 @@ function runGenerator() {
                     type: "list",
                     message: "Who are you adding to your roster?",
                     name: "addEmployeePrompt",
-                    choices: ["Manager", "Intern", "Engineer", "All done!"],
+                    choices: [
+                        "Manager",
+                        "Intern",
+                        "Engineer",
+                        "Finished roster.",
+                    ],
                 },
             ])
             .then(function (userInput) {
@@ -39,7 +44,7 @@ function runGenerator() {
                 }
             });
     }
-//separate functions for each type of team member.
+    //separate functions for each type of team member.
     function addManager() {
         inquirer
             .prompt([
@@ -157,7 +162,9 @@ function runGenerator() {
             });
     }
     function htmlBuilder() {
-        console.log("Success! Your roster has been created. Thank you for using our app!");
+        console.log(
+            "Success! Your roster has been created. Thank you for using our app! To see your roster, right-click on the new generated 'roster.html' in the 'visuals' folder, then select 'Open in Live Server'."
+        );
 
         fs.writeFileSync(outputPath, generateTeam(teamArray), "UTF-8");
     }
@@ -166,4 +173,4 @@ function runGenerator() {
 }
 //run function
 runGenerator();
-//you will find your finished team html page in the 'visuals' folder!
+//you will find your finished roster.html page in the 'visuals' folder!

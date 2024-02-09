@@ -58,7 +58,7 @@ const createTeam = team => {
 </div>
       `;
   };
-
+//Using strict equality to be safe
   html.push(team
       .filter(employee => employee.getRole() === "Manager")
       .map(manager => createManager(manager))
