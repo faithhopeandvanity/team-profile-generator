@@ -9,7 +9,7 @@ const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 const generateTeam = require("./src/template.js")
 
-function runApp () {
+function runGenerator () {
 
   function createRoster () {
     inquirer.prompt([{
@@ -34,3 +34,119 @@ function runApp () {
       }
     })
   }
+
+  function addManager() {
+    inquirer.prompt ([
+      
+      {
+        type: "input",
+        name: "managerName",
+        message: "What is the manager's name?"
+      },
+  
+      {
+        type: "input",
+        name: "managerIdNo",
+        message: "What is their employee ID #?"
+      },
+  
+      {
+        type: "input",
+        name: "managerEmail",
+        message: "What is their email address?"
+      },
+  
+      {
+        type: "input",
+        name: "managerOfficeNumber",
+        message: "What is their office number?"
+      }
+  
+    ]).then(answers => {
+      const manager = new Manager(answers.managerName, answers.managerIdNo, answers.managerEmail, answers.managerOfficeNumber);
+      teamArray.push(manager);
+      createRoster();
+    });
+  
+  }
+
+  function addEngineer() {
+    inquirer.prompt([
+      
+      {
+        type: "input",
+        name: "engineerName",
+        message: "What is theirname?"
+      },
+
+      {
+        type: "input",
+        name: "engineerIdNo",
+        message: "What is their employee ID #?" 
+      },
+
+      {
+        type: "input",
+        name: "engineerEmail",
+        message: "What is their email address?"
+      },
+
+      {
+        type: "input",
+        name: "engineerGithub",
+        message: "What is their GitHub username?"
+      }
+
+    ]).then(answers => {
+      const engineer = new Engineer(answers.engineerName, answers.engineerIdNo, answers.engineerEmail, answers.engineerGithub);
+      teamArray.push(engineer);
+      createRoster();
+    });
+
+  }
+  function addIntern() {
+    inquirer.prompt([
+      
+      {
+        type: "input",
+        name: "internName",
+        message: "What is their name?"
+      },
+
+      {
+        type: "input",
+        name: "internIdNo",
+        message: "What is their employee ID #?" 
+      },
+
+      {
+        type: "input",
+        name: "internEmail",
+        message: "What is their email address?"
+      },
+
+      {
+        type: "input",
+        name: "internSchool",
+        message: "What educational institution is your intern currently at?"
+      }
+
+    ]).then(answers => {
+      const intern = new Intern(answers.internName, answers.internIdNo, answers.internEmail, answers.internSchool);
+      teamArray.push(intern);
+      createRoster();
+    });
+
+  }
+  function htmlBuilder () {
+    console.log("Success! Your roster has been created.")
+
+    fs.writeFileSync(outputPath, generateTeam(teamArray), "UTF-8")
+
+}
+
+createRoster();
+
+}
+
+runGenerator();
