@@ -1,3 +1,5 @@
+teamArray = [];
+//list of requires
 const Manager = require("./libr/Manager.js");
 const inquirer = require("inquirer");
 const fs = require("fs");
@@ -5,8 +7,8 @@ const path = require("path");
 //'libr' as in 'library'
 const Engineer = require("./libr/Engineer.js");
 const Intern = require("./libr/Intern.js");
-const OUTPUT_DIR = path.resolve(__dirname, "output");
-const outputPath = path.join(OUTPUT_DIR, "roster.html");
+const outputDirectory = path.resolve(__dirname, "visuals");
+const outputPath = path.join(outputDirectory, "roster.html");
 const generateTeam = require("./src/boilerplate.js");
 
 function runGenerator() {
@@ -26,7 +28,7 @@ function runGenerator() {
                         addManager();
                         break;
                     case "Intern":
-                        addInter();
+                        addIntern();
                         break;
                     case "Engineer":
                         addEngineer();
@@ -37,20 +39,20 @@ function runGenerator() {
                 }
             });
     }
-
+//separate functions for each type of team member.
     function addManager() {
         inquirer
             .prompt([
                 {
                     type: "input",
                     name: "managerName",
-                    message: "What is the manager's name?",
+                    message: "What is your manager's name?",
                 },
 
                 {
                     type: "input",
                     name: "managerIdNo",
-                    message: "What is their employee ID #?",
+                    message: "Their employee ID #?",
                 },
 
                 {
@@ -62,7 +64,7 @@ function runGenerator() {
                 {
                     type: "input",
                     name: "managerOfficeNumber",
-                    message: "What is their office number?",
+                    message: "...finally, what is their office number?",
                 },
             ])
             .then((answers) => {
@@ -83,7 +85,7 @@ function runGenerator() {
                 {
                     type: "input",
                     name: "engineerName",
-                    message: "What is theirname?",
+                    message: "What is your engineer's name?",
                 },
 
                 {
@@ -95,13 +97,13 @@ function runGenerator() {
                 {
                     type: "input",
                     name: "engineerEmail",
-                    message: "What is their email address?",
+                    message: "Their email address?",
                 },
 
                 {
                     type: "input",
                     name: "engineerGithub",
-                    message: "What is their GitHub username?",
+                    message: "...and their GitHub username?",
                 },
             ])
             .then((answers) => {
@@ -127,13 +129,13 @@ function runGenerator() {
                 {
                     type: "input",
                     name: "internIdNo",
-                    message: "What is their employee ID #?",
+                    message: "What is their employee ID number?",
                 },
 
                 {
                     type: "input",
                     name: "internEmail",
-                    message: "What is their email address?",
+                    message: "...and their email address?",
                 },
 
                 {
@@ -155,12 +157,13 @@ function runGenerator() {
             });
     }
     function htmlBuilder() {
-        console.log("Success! Your roster has been created.");
+        console.log("Success! Your roster has been created. Thank you for using our app!");
 
         fs.writeFileSync(outputPath, generateTeam(teamArray), "UTF-8");
     }
 
     createRoster();
 }
-
+//run function
 runGenerator();
+//you will find your finished team html page in the 'visuals' folder!
